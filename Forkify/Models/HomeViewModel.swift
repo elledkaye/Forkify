@@ -8,6 +8,10 @@ class HomeViewModel: ObservableObject {
     @Published var searchText: String = ""
     @Published var errorMessage: String = ""
     
+    /// Variable to determine whether or not we are showing the RecipeResultsView
+    @Published var isPresentingRecipeResults: Bool = false
+    
+    
     func searchRecipeText(){
         // If searchText is valid, we want to bring the user to the next view
         // If searchText is not valid, we want to display an error "Please enter in a valid food name"
@@ -15,6 +19,7 @@ class HomeViewModel: ObservableObject {
         // If validateSearchText returns true proceed, otherwise exit
         guard validateSearchText() else{
             return
+           
         }
             
         }
@@ -25,9 +30,11 @@ class HomeViewModel: ObservableObject {
             // if it's empty we return false
             // if it's not empty we return true
             guard !searchText.trimmingCharacters(in: .whitespaces).isEmpty else{
-                errorMessage = "Please Enter In A Valid Food Name"
+                errorMessage = "Please Enter a Valid Food Name"
+                isPresentingRecipeResults = false
                 return false
         }
+            isPresentingRecipeResults = true
             return true
         
     }
