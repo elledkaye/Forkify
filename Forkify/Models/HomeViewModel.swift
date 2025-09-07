@@ -17,6 +17,7 @@ class HomeViewModel: ObservableObject {
         // If searchText is not valid, we want to display an error "Please enter in a valid food name"
         // REMINDER: guards check for failures and exits early if the condition is false
         // If validateSearchText returns true proceed, otherwise exit
+    
         guard validateSearchText() else{
             return
            

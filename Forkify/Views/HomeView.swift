@@ -4,6 +4,8 @@ import SwiftUI
 /// Welcome screen with a search bar, and display lists
 struct HomeView: View {
     
+    // Reminder that that @State gives your View access to any @Published properties inside the ViewModel (HomeViewModel)
+    // SwiftUI will observe changes in @Published and refresh the View as needed
     /// Initializes and owns an instance of HomeViewModel using @StateObject,
     /// so that the view can observe and react to its published changes.
     @StateObject var viewModel = HomeViewModel()
@@ -36,13 +38,20 @@ struct HomeView: View {
                     // Call a function to validate if the input if valid (no special characters or just space)
                     // Navigate to a "Recipe list view"
                     /// Call the searchRecipeText function that is inside the HomeViewModel
+                    // 08/14 If there is no recipe result returned -> no results were returned for this search ter
+                    // You can control the input type (don't allow certain characters)
+                    // Prevent numbers
+                    // not making that navigation until we call to the service
+                    // not navigating until we found a recipe
                     viewModel.searchRecipeText()
                 }
                 NavigationLink(
+                    /// Show the RecipeResults screen and pass it a string
                     destination: RecipeResultsView(searchText: viewModel.searchText),
                     isActive: $viewModel.isPresentingRecipeResults
                     
                 ){
+                    // 7/25/2025 - Question for Hoshiar, is this right what is the purpose of this?
                     EmptyView()
                 }
                 
